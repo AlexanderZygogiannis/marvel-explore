@@ -22,9 +22,3 @@
 // eslint-disable-next-line vue/no-setup-props-destructure, vue/require-prop-types
 const { comic } = defineProps(['comic'])
 </script>
-
-<style scoped>
-  .thumb {
-    width: 100%;
-  }
-</style>
