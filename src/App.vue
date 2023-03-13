@@ -1,12 +1,12 @@
 <template>
-  <div class="app">
-    <Suspense>
-      <InfiniteScroll />
-      <template #fallback>
-        <p>Loading...</p>
-      </template>
-    </Suspense>
-  </div>
+  <Suspense>
+    <InfiniteScroll />
+    <template #fallback>
+      <p class="font-bold text-xl text-center p-4">
+        Loading...
+      </p>
+    </template>
+  </Suspense>
 </template>
 
 <script setup lang="ts">

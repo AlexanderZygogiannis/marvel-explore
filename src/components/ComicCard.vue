@@ -1,14 +1,20 @@
 <template>
-  <div class="card text-center">
+  <div class="card text-gray-500 p-2">
     <img
       :src="`${comic.thumbnail.path}.${comic.thumbnail.extension}`"
-      class="thumb"
+      class="max-w-full max-h-72 mx-auto"
     >
-    <p class="font-bold text-gray-500 m-4 truncate">
+    <h2 class="font-bold mx-1 my-2 text-center">
       {{ comic.title }}
-    </p>
-    <p><span>Issue Number:</span> {{ comic.issueNumber }}</p>
-    <p><span>Price:</span> {{ comic.prices[0].price }}</p>
+    </h2>
+    <div class="border-t p-1">
+      <p class="m-1">
+        <span class="font-medium text-sm">Price:</span> {{ comic.prices[0].price }}
+      </p>
+      <p class="m-1">
+        <span class="font-medium text-sm">Issue Number:</span> {{ comic.issueNumber }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -19,8 +25,6 @@ const { comic } = defineProps(['comic'])
 
 <style scoped>
   .thumb {
-    max-height: 120px;
-    max-width: 70%;
-    margin: 0 auto;
+    width: 100%;
   }
 </style>
