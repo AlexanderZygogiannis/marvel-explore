@@ -1,16 +1,14 @@
 <template>
-  <div class="app" />
+  <div class="app">
+    <Suspense>
+      <InfiniteScroll />
+      <template #fallback>
+        <p>Loading...</p>
+      </template>
+    </Suspense>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'App',
-  components: {
-  },
-});
+<script setup lang="ts">
+import InfiniteScroll from './components/InfiniteScroll.vue';
 </script>
-
-<style lang="scss">
-</style>
