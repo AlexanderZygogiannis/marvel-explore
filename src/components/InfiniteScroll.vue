@@ -13,39 +13,42 @@
       </li>
       <li
         v-if="fetchingData"
-        class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 p-3 font-bold text-center text-xl "
+        class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 p-3 font-bold text-center text-xl"
       >
         Fetching more comics... Please hold
       </li>
     </ul>
   </div>
 </template>
-  
+
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useInfiniteScroll } from '@vueuse/core'
-import ComicCard from './ComicCard.vue';
-import getComics from '../api/getComics'
+import { ref, onMounted } from "vue";
+import { useInfiniteScroll } from "@vueuse/core";
+import ComicCard from "./ComicCard.vue";
+import getComics from "../api/getComics";
 
-const listEl = ref<HTMLElement | null>(null)
+const listEl = ref<HTMLElement | null>(null);
 
-const page = ref(0)
+const page = ref(0);
+const comicsList = ref();
 
-const comicsList = ref(await getComics(page.value))
+const fetchingData = ref<null | boolean>(null);
 
-const fetchingData = ref<null | boolean>(null)
+onMounted(async () => {
+  comicsList.value = await getComics(page.value);
+});
 
 const getComicsOnScroll = async () => {
-  fetchingData.value = true
-    
-  page.value += 1
-  
-  const newComics = await getComics(page.value)
+  fetchingData.value = true;
 
-  fetchingData.value = null
+  page.value += 1;
 
-  comicsList.value.push(...newComics)
-}
+  const newComics = await getComics(page.value);
+
+  fetchingData.value = null;
+
+  comicsList.value.push(...newComics);
+};
 
 useInfiniteScroll(
   listEl,
@@ -53,7 +56,7 @@ useInfiniteScroll(
     await getComicsOnScroll();
   },
   { distance: 10 }
-)
+);
 </script>
 
 <style scoped>
